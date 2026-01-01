@@ -1,0 +1,515 @@
+ 
+ 
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap");
+
+:root {
+     --main-color: #517b7e;
+    --text-color: #333;
+    --secondry-color: #f0f0ff;
+}
+
+body {
+    margin: 0;
+    font-family: "Cairo", sans-serif;
+    display: flex;
+    background-color: #f4f6f8;
+    height: 100vh;
+}
+
+h1,
+h2,
+label {
+    color: var(--text-color);
+}
+
+/* ==========================
+   اللوحة الجانبية Sidebar
+========================== */
+.sidebar {
+    width: 20%;
+    background-color: var(--main-color);
+    color: white;
+    padding: 20px 0;
+    overflow-y: auto;
+    transition: 0.5s;
+}
+
+.sidebar .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 20px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+ .menu {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.menu li {
+    position: relative;
+}
+
+.menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    font-size: 18px;
+    transition: 0.3s;
+    font-weight: 100;
+}
+
+.menu a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    gap: 20px;
+}
+
+ .menu-item .submenu {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    margin: 5px 15px;
+}
+.menu-item.open .submenu {
+    display: block;
+    animation: slideDown 0.3s linear;
+}
+.submenu li a {
+    font-size: 15px;
+    padding-left: 40px;
+}
+ 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+ 
+/* ==========================
+   المحتوى العام Content
+========================== */
+.content {
+    flex: 1;
+    position: relative;
+    padding: 40px;
+    height: 90vh;
+    overflow: auto;
+}
+
+/* ==========================
+   احصاء المعلومات   
+========================== */
+.stats-cards {
+    width: 100%;
+    height: 90vh;
+    display: grid;
+    grid-template-areas:
+        "1fr 1fr"
+        "1fr 1fr";
+}
+.stats-cards .card {
+    width: 60%;
+    margin-right: 15%;
+    margin-top: 15%;
+    height: 60%;
+    border-bottom: solid 5px var(--main-color);
+    border-left: solid 5px var(--main-color);
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+     background-image: linear-gradient(to right, #e7bf9f, #517b7e);
+} 
+
+/* ==========================
+   نماذج الإدخال Forms
+========================== */
+
+ .content-add-subject .subject-form {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-add-student .student-form,
+.content-add-subject .subject-form,
+.class-content .class-form,
+.content-add-teacher .teacher-form {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    border: none;
+    border-left: 10px solid var(--main-color);
+    border-bottom: 10px solid var(--main-color);
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+ .card .search-box {
+    margin: 0 10px 0 10px;
+    display: flex;
+    flex-direction: row;
+}
+.card .search-box input {
+    padding: 10px 30px 10px 10px;
+    font-size: 18px;
+    width: 20%;
+    outline: none;
+    color: var(--text-color);
+    border: 2px solid var(--main-color);
+    color: var(--text-color);
+    border-radius: 0 40px 10px 0;
+}
+.card .search-box button {
+    border: none;
+    border-radius: 10px 0 0 40px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+    background-color: var(--main-color);
+    color: var(--secondry-color);
+}
+ .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 30px;
+}
+.form-group {
+    display: flex;
+    flex-direction: row;
+}
+.form-group i {
+    font-size: 20px;
+    color: var(--main-color);
+}
+.form-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 6px;
+    position: absolute;
+    margin: 10px 30px 0;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border: none;
+    background-color: #517b7e11;
+    padding: 15px;
+    font-size: 15px;
+    border-radius: 10px;
+    border-right: 5px solid var(--main-color);
+    outline: none;
+    transition: 0.1s;
+}
+
+.form-group input::placeholder,
+.form-group select::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-color);
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    transition: 0.1s;
+    border-right: 0px solid var(--main-color);
+}
+
+ .full-width {
+    grid-column: span 2;
+}
+
+ .content-add-student h1 {
+    border-bottom: solid 8px var(--main-color);
+    border-radius: 10px;
+    display: inline-block;
+}
+
+ .form-actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+}
+.btn-primary,
+.btn-secondary,
+.btn-view,
+.btn-print {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+    font-weight: 600;
+}
+.btn-primary {
+    background-color: var(--main-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: #4d4d4d;
+}
+
+.btn-secondary {
+    background-color: #f4f6f8;
+    border: 1px solid #ccc;
+    color: var(--text-color);
+}
+.btn-secondary:hover {
+    background-color: #e6e6e6;
+}
+
+.btn-save {
+    background-color: var(--main-color);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-save:hover {
+    background-color: darken(var(--main-color), 10%);
+    transform: translateY(-2px);
+}
+
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background-color: #d5d5d5;
+    transform: translateY(-2px);
+}
+.btn-edit {
+    background-color: var(--main-color);
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    padding: 5px 15px 5px 15px;
+    transition: 0.3s linear;
+}
+.btn-delete {
+    background-color: #c0392b;
+    margin-top: 10px;
+    padding: 5px 15px 5px 15px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    color: white;
+    transition: 0.3s linear;
+    font-size: 18px;
+}
+.btn-edit:hover {
+    background-color: #3b595b;
+    cursor: pointer;
+}
+.btn-delete:hover {
+    background-color: #9a2d21;
+    cursor: pointer;
+}
+/* ==========================
+   الجداول Tables
+========================== */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+thead {
+    background-color: var(--main-color);
+    color: #fff;
+}
+th,
+td {
+    padding: 12px 15px;
+    text-align: center;
+}
+tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+tbody tr:hover {
+    background-color: #00000020;
+}
+
+/* ==========================
+   أزرار التصفح Pagination
+========================== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.pagination {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+.pagination li {
+    margin: 0;
+    border-right: 1px solid #dee2e6;
+}
+.pagination li:last-child {
+    border-right: none;
+}
+
+.page-link {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    text-decoration: none;
+    color: var(--main-color);
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+.page-link:hover {
+    background-color: #e9ecef;
+}
+
+.pagination li.active .page-link {
+    color: #fff;
+    background-color: var(--main-color);
+    pointer-events: none;
+}
+.pagination li.disabled .page-link {
+    color: #6c757d;
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* ==========================
+   واجهات إضافية
+========================== */
+.alert-success {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.alert-error {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+ .assign-content h1 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+.assign-form {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 50px;
+    border-bottom: solid 5px var(--main-color);
+    border-left: solid 5px var(--main-color);
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+.assign-buttons {
+    grid-column: span 3;
+    text-align: center;
+    margin-top: 60px;
+}
+
+ .btn-assign,
+.btn-cancel {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s;
+}
+.btn-assign {
+    background-color: var(--main-color);
+}
+.btn-cancel {
+    background-color: #e74c3c;
+    margin-left: 10px;
+}
+.btn-assign:hover {
+opacity: .8;
+}
+.btn-cancel:hover {
+    background-color: #c0392b;
+}
+ 
+/* صفحة تعديل البيانات */
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+
+    align-items: center;
+}
+.modal-content {
+    background: #fff;
+    padding: 25px;
+    width: 50%;
+    display: flex;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 10px;
+}
+
+.modal-content h2 {
+    color: #517b7e;
+}
+.modal-content form input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.modal-buttons .btn-save {
+    padding: 10px 25px 10px 25px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    transition: 0.3s linear;
+}
+.modal-buttons .btn-save:hover {
+    background-color: #000000a8;
+    transform: translateY(-2px);
+    cursor: pointer;
+}

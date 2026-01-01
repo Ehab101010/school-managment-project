@@ -1,0 +1,26 @@
+# Laravel
+/vendor
+/node_modules
+/public/build
+/storage/*.key
+
+# Environment
+.env
+
+# Database
+*.sqlite
+*.sqlite-journal
+
+# Logs
+/storage/logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+/.idea
+/.vscode
