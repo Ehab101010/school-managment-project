@@ -66,13 +66,11 @@ function openEditModal(id) {
             document.getElementById("t_email").value = teacher.email;
             document.getElementById("t_notes").value = teacher.notes;
 
-            // تحديث رابط الفورم
-            document.getElementById(
+             document.getElementById(
                 "teacherForm"
             ).action = `/admin/teachers/update/${id}`;
 
-            // عرض المودال
-            document.getElementById("teacherModal").style.display = "flex";
+             document.getElementById("teacherModal").style.display = "flex";
         })
         .catch(() => alert("فشل في جلب بيانات المعلم"));
 }

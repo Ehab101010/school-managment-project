@@ -44,14 +44,18 @@ cd school-managment-project
 
 ### 2️⃣ Install dependencies
 
+```bash
 composer install
 npm install
 npm run build
+```
 
 ### 3️⃣ Environment configuration
 
+```bash
 cp .env.example .env
 php artisan key:generate
+```
 
 ## 🗄 Database Initialization : SQL Import
 
@@ -60,7 +64,9 @@ database/sql/school_db
 
 ## ▶️ Running the Application
 
+```bash
 php artisan serve
+```
 
 ## 🔐 Default Test Users
 
@@ -72,12 +78,12 @@ Password: admin123
 
 Teacher
 
-Email: ahmad.ali
+username: ahmad.ali
 
 Password: 123
 
 Student
 
-Email: student_19
+username: student_19
 
 Password: 123456
