@@ -16,19 +16,18 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {$this->call(UserSeeder::class);
 
-        // $this->call([
-        //     UserSeeder::class,
-        //     ParentSeeder::class,
-        //     TeacherSeeder::class,
-        //     StudentSeeder::class,
-        //     SectionSeeder::class,
-        //     ClassSeeder::class,
-        //     SubjectSeeder::class,
-        //     ClassAssignmentSeeder::class,
-        //     WeeklyScheduleSeeder::class,
-        //     LearningContentSeeder::class,
-        //     ExamScheduleSeeder::class,
-        //     GradeSeeder::class,
-        // ]);
+        $this->call([
+            // ClassesSeeder::class,
+            // SubjectsSeeder::class,
+            // TeachersSeeder::class,
+            // StudentsSeeder::class,
+            // ClassSubjectSeeder::class,
+            // ClassAssignmentsSeeder::class,
+            // TimetablesSeeder::class,
+            // ExamSchedulesSeeder::class,
+            // GradesSeeder::class,
+            // LearningContentsSeeder::class,
+            // UsersSeeder::class,
+        ]);
     }
 }
