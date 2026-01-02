@@ -38,8 +38,8 @@ Follow the steps below to run the project locally:
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/USERNAME/REPO_NAME.git
-cd edu-school
+git clone https://github.com/Ehab101010/school-managment-project.git
+cd school-managment-project
 ```
 
 ### 2️⃣ Install dependencies
