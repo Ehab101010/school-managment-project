@@ -87,3 +87,7 @@ Student
 username: student_19
 
 Password: 123456
+
+## ⚠️ The project report is available in :
+
+Report/Project Report
