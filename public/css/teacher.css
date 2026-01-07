@@ -9,9 +9,10 @@ body {
 }
 :root {
     --main-color: #5b6572; 
+    --main-color: #234e52; 
     --text-color: #333;
 }
-
+ 
  .sidebar {
     width: 260px;
      background-color: var(--main-color);
@@ -97,7 +98,7 @@ h1 {
         transform: translateY(0);
     }
 }
-
+ 
 /* ======== الجدول ======== */
 table {
     width: 100%;
@@ -236,34 +237,29 @@ form .search-box button {
     border-color: #3b82f6;
     outline: none;
 }
-
- .create-content {
+  .create-content {
     padding: 40px;
     width: 100%;
  }
-
-.page-header h1 {
-    color: var(--main-color);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
+.page-header{
+    width: 80%;
+    margin-right: 10%;
 }
-
+ 
 .page-header p {
     color: #666;
     margin-bottom: 30px;
 }
-
-.create-content-form {
+.create-content form {
     background: #fff;
     padding: 30px;
-     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     width: 80%;
     margin-right: 10%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
 }
 
@@ -279,6 +275,9 @@ label {
     color: var(--text-color);
     margin-bottom: 5px;
 }
+.create-content form .btn-primary{
+    margin-left: 15%;
+ }
 
 input,
 select,
@@ -340,8 +339,7 @@ textarea {
 /* ====== عرض المحتوى التعليمي ====== */
 
 .content-container {
-    margin: 40px auto;
-    background: #fff;
+     background: #fff;
     padding: 30px 40px;
     border-radius: 20px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
@@ -349,7 +347,7 @@ textarea {
 
 .content-container h1 {
     text-align: center;
-    color: #589e9d;
+    color: var(--text-color);
     margin-bottom: 30px;
 }
 
@@ -510,7 +508,7 @@ textarea {
 
 h1 {
     text-align: center;
-    color: #2b6777;
+    color: var(--text-color);
     margin-bottom: 25px;
 }
 

@@ -11,7 +11,7 @@
 @include('includes.student-sidebar')
 
 <div class="content content-container">
-    <h1>📚 المحتوى التعليمي</h1>
+    <h1> المحتوى التعليمي</h1>
 
     <table class="content-table">
         <thead>

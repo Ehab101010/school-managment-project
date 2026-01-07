@@ -9,8 +9,9 @@ body {
 }
 :root {
     --main-color: #2b6cb0;
-    --text-color: #2d3748;
+    --text-color: #2b6cb0;
 }
+
  
  .sidebar {
     width: 260px;
@@ -280,7 +281,7 @@ table tbody tr:hover {
 h1 {
     text-align: center;
     color: var(--text-color);
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
 .schedule-table {

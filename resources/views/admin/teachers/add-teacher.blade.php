@@ -24,36 +24,64 @@
         @csrf
     <div class="form-grid">
          <div class="form-group">
-             <input type="text" name="full_name" placeholder="الاسم الكامل" required>
+                    <div class="input-with-icon">
+                        <i class='bx bx-user'></i>
+                        <input type="text" name="full_name" placeholder="اكتب الاسم الكامل">
+                    </div>
+         </div>
+        <div class="form-group">
+        <div class="input-with-icon">
+                        <i class='bx bx-female'></i>
+                        <input type="text" name="mother_name" placeholder="اسم الأم">
+                    </div>        </div>
+        <div class="form-group">
+        <div class="input-with-icon">
+                         <input type="date" name="birth_date">
+                    </div>
+                       </div>
+        <div class="form-group">
+        <div class="input-with-icon">
+                        <i class='bx bx-male-female'></i>
+                        <select name="gender">
+                            <option value="">اختر</option>
+                            <option value="ذكر">ذكر</option>
+                            <option value="أنثى">أنثى</option>
+                        </select>
+                    </div>
         </div>
         <div class="form-group">
-             <input type="text" name="mother_name" placeholder="اسم الأم">
-        </div>
+        <div class="input-with-icon">
+                        <i class='bx bx-flag'></i>
+                        <input type="text" name="nationality" placeholder="الجنسية">
+                    </div>        
+               </div>
+
         <div class="form-group">
-             <input type="date" name="birth_date">
-        </div>
-        <div class="form-group">
-             <select name="gender">
-                <option value="">الجنس</option>
-                <option value="male">ذكر</option>
-                <option value="female">أنثى</option>
-             </select>
-        </div>
-        <div class="form-group">
-             <input type="text" name="nationality" placeholder="الجنسية">
-        </div>
-        <div class="form-group">
+       <div class="input-with-icon">
+        <i class='bx bx-home'></i>
              <input type="text" name="address" placeholder="مكان السكن">
         </div>
-        <div class="form-group">
-             <input type="tel" name="phone" placeholder="رقم الهاتف">
         </div>
+
         <div class="form-group">
+        <div class="input-with-icon">
+                        <i class='bx bx-phone'></i>
+                        <input type="tel" name="phone" placeholder="رقم الهاتف">
+                        </div>
+        </div>
+      
+        <div class="form-group">
+        <div class="input-with-icon">
+        <i class='bx bx-envelope'></i>
              <input type="email" name="email" placeholder="البريد الإلكتروني">
         </div>
-        <div class="form-group full-width">
+</div>
+        <div class="form-group full-width"> 
+        <div class="input-with-icon">
+        <i class='bx bx-note'></i>
              <textarea name="notes" rows="4" placeholder="ملاحظات"></textarea>
         </div>
+</div>
     </div>
 
     <div class="form-actions">

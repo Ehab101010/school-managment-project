@@ -14,8 +14,7 @@
 <div class="content create-content">
     <div class="page-header">
         <h1><i class='bx bx-book-add'></i> إنشاء محتوى تعليمي</h1>
-        <p>قم بإضافة محتوى جديد للطلاب في أحد الصفوف الدراسية.</p>
-    </div>
+     </div>
 
      <form action="{{ route('teacher.storeContent') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -35,7 +34,6 @@
     </div>
 @endif
 
-        <!-- المادة الدراسية -->
         <div class="form-group">
             <label>المادة الدراسية</label>
             <select name="subject_id" required>

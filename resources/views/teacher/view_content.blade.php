@@ -9,13 +9,12 @@
 <body>
 @include('includes.teacher-sidebar')
     <div class="content content-container">
-        <h1>📚 المحتوى التعليمي</h1>
+        <h1>  المحتوى التعليمي</h1>
  
         <table class="content-table">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>المادة الدراسية</th>
+                     <th>المادة الدراسية</th>
                     <th>الصف الدراسي</th>
                     <th>العنوان</th>
                     <th>النوع</th>
@@ -27,8 +26,7 @@
             <tbody>
 @foreach ($content as $item)
     <tr>
-        <td>{{ $item->id }}</td>
-
+ 
         <td>{{ $item->subject->subject_name ?? '---' }}</td>
         <td>
     {{ $item->class->class_name ?? '---' }}

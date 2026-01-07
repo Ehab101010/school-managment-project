@@ -11,13 +11,23 @@
                 <span>الرئيسية</span>
             </a>
         </li>
-
-      
-                <li><a href="{{ route('teacher.view-stu-info') }}">          <i class='bx bx-edit'></i>
-                عرض بيانات الطلاب</a></li>
- 
-                <li><a href="{{ route('teacher.timetable') }}">
+        <li class="menu-item">
+            <a href="#" class="menu-btn">
+                <i class='bx bx-show'></i>
+                <span>عرض البيانات</span>
+                <i class='bx bx-chevron-down arrow'></i>
+            </a>
+            <ul class="submenu">
+            <li><a href="{{ route('teacher.view-stu-info') }}">          <i class='bx bx-edit'></i>
+            بيانات الطلاب</a></li>
+            
+            <li><a href="{{ route('teacher.timetable') }}">
                 <i class='bx bx-check-square'></i> البرنامج الدراسي     </a></li>
+            </ul>
+        </li>
+      
+           
+ 
  
         <li>
             <a href="{{route('teacher.add-grades')}}">

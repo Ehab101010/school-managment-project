@@ -34,7 +34,7 @@
                 @csrf
                     <div class="input_box">
                         <i class='bx bx-user'></i>
-                        <input type="text" name="username" value="{{ old('username') }}" required>
+                        <input type="text" name="username"  required>
                         <label>اسم المستخدم</label>
                     </div>
 

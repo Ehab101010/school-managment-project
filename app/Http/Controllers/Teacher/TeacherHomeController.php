@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Teacher;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
-// 🟦 استدعاء المودلز الصحيحة
 use App\Models\Student;
 use App\Models\ClassModel;
 use App\Models\Section;
@@ -23,22 +21,18 @@ class TeacherHomeController extends Controller
 
     public function showStudentInformation(Request $request)
     {
-        $teacherId = auth()->user()->profile_id; // المعلم الحالي
+        $teacherId = auth()->user()->profile_id;
     
-        // جلب جميع الصفوف والمواد التي يدرسها هذا المعلم
         $assignments = DB::table('class_assignments')
             ->where('teacher_id', $teacherId)
             ->select('class_id', 'subject_id')
             ->get();
     
-        // استخراج الصفوف فقط
         $classIds = $assignments->pluck('class_id')->unique();
     
-        // الطلاب في هذه الصفوف فقط
         $students = Student::with('class')
             ->whereIn('class_id', $classIds);
     
-        // تطبيق البحث لو كان موجود
         if ($request->input('query')) {
             $query = $request->input('query');
             $students->where('full_name', 'LIKE', "%{$query}%");
@@ -184,10 +178,10 @@ class TeacherHomeController extends Controller
         'class_id'      => 'required|integer',
         'title'         => 'required|string|max:255',
         'content_type'  => 'required|in:video,pdf,excel,assignment,link',
-'description'   => 'required|string',
-         'pdf_file'      => 'nullable|mimes:pdf|max:20480',        
+        'description'   => 'required|string',
+        'pdf_file'      => 'nullable|mimes:pdf|max:20480',        
         'excel_file'    => 'nullable|mimes:xls,xlsx|max:20480',   
-'external_link' => 'nullable|string',
+        'external_link' => 'nullable|string',
     ]);
 
     $teacherId = auth()->user()->profile_id;

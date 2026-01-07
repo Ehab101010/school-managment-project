@@ -11,7 +11,7 @@
 @include('includes.student-sidebar')
 
 <div class="content content-profile">
-    <h1>البيانات الشخصية</h1>
+     <h1>البيانات الشخصية</h1>
 
      <div class="profile-section">
 
