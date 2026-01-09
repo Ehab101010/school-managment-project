@@ -11,7 +11,7 @@
 @include('includes.admin-sidebar')
 <div class="content content-add-subject">
 
-    <h1><i class='bx bx-book-add'></i> إضافة مادة دراسية جديدة</h1>
+    <h1> إضافة مادة دراسية جديدة</h1>
          @if(session('success'))
         <div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
             {{ session('success') }}

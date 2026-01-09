@@ -12,7 +12,7 @@
 
 <div class="content class-content" style="">
   
-    <h2>الصفوف الدراسية الحالية</h2>
+    <h1>الصفوف الدراسية الحالية</h1>
     
     <table>
         <thead>

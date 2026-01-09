@@ -3,7 +3,7 @@
         <i class='bx bxs-user'></i>
         <span>واجهة المعلم</span>
     </div>
-
+ 
     <ul class="menu">
         <li>
             <a href="{{ route('teacher.dashboard') }}" class="p-3 block">

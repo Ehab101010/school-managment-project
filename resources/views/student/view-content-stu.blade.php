@@ -12,8 +12,8 @@
 
 <div class="content content-container">
     <h1> المحتوى التعليمي</h1>
-
-    <table class="content-table">
+<div class="content-table">
+    <table >
         <thead>
             <tr>
                 <th>#</th>
@@ -59,6 +59,7 @@
         </tbody>
 
     </table>
+    </div>
 </div>
 
 <script src="{{ asset('js/student.js') }}"></script>

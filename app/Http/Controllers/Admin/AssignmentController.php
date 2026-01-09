@@ -18,7 +18,7 @@ class AssignmentController extends Controller
 
         $assignments = ClassAssignment::with(['teacher', 'class', 'subject'])
             ->when($search, function ($query, $search) {
-                $query->whereHas('teacher', function ($q) use ($search) {
+                $query->whereHas('teacher', function ($q) use ($sea9rch) {
                     $q->where('full_name', 'LIKE', "%$search%");
                 })
                 ->orWhereHas('subject', function ($q) use ($search) {

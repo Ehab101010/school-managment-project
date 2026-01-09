@@ -11,7 +11,7 @@
 @include('includes.admin-sidebar')
 
     <div class="content content-view-subjects">
-        <h1><i class='bx bx-book'></i> المواد الدراسية</h1>
+        <h1>  المواد الدراسية</h1>
 
    
         <div class="card">

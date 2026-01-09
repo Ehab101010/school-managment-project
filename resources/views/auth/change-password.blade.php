@@ -47,8 +47,7 @@
                 <div class="input_box">
                     <i class='bx bx-lock'></i>
                     <input type="password" name="old_password" required>
-<label>كلمة المرور الحالية</label>
-                    <label>كلمة المرور الحالية</label>
+                     <label>كلمة المرور الحالية</label>
                 </div>
 
                 <div class="input_box">
