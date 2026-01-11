@@ -26,7 +26,7 @@
          <div class="form-group">
                     <div class="input-with-icon">
                         <i class='bx bx-user'></i>
-                        <input type="text" name="full_name" placeholder="اكتب الاسم الكامل">
+                        <input type="text" name="full_name" placeholder=" الاسم الكامل">
                     </div>
          </div>
         <div class="form-group">

@@ -12,13 +12,12 @@
 @include('includes.teacher-sidebar')
 
 <div class="content create-content">
+
+
     <div class="page-header">
         <h1><i class='bx bx-book-add'></i> إنشاء محتوى تعليمي</h1>
      </div>
-
-     <form action="{{ route('teacher.storeContent') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        @if ($errors->any())
+     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -29,11 +28,13 @@
 @endif
 
 @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
+<div style="background: #d4edda; color: #155724; padding: 10px; border-radius: 5px;">
+{{ session('success') }}
     </div>
 @endif
-
+     <form action="{{ route('teacher.storeContent') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+       
         <div class="form-group">
             <label>المادة الدراسية</label>
             <select name="subject_id" required>

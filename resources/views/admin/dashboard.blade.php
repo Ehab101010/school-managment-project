@@ -16,10 +16,9 @@
  
 
     <div class="content">
-        
-
+        <h1>مرحبًا بك في لوحة تحكم المدير</h1>
+        <p>اختر إحدى الخيارات من القائمة اليسرى للبدء.</p>
     </div>
-
     <script src="{{ asset('js/admin.js') }}" defer></script>
  
  

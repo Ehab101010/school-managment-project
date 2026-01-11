@@ -29,22 +29,21 @@
                  </tr>
             </thead>
             <tbody>
-    @forelse ($timetable as $row)
-        <tr>
-            <td>{{ $row->day }}</td>
-            <td>{{ $row->period }}</td>
-            <td>{{ $row->time_from }} - {{ $row->time_to }}</td>
-            <td>{{ $row->class_name }}</td>
-            <td>{{ $row->subject_name }}</td>
-            <td>{{ $row->room }}</td>
-        </tr>
-    @empty
-        <tr>
-            <td colspan="6" style="text-align:center; color:red;">
-                لا توجد حصص لهذا المعلّم حالياً
-            </td>
-        </tr>
-    @endforelse
+            @forelse ($timetable as $row)
+    <tr>
+        <td>{{ $row->day }}</td>
+        <td>{{ $row->period }}</td>
+        <td>{{ $row->time_from }} - {{ $row->time_to }}</td>
+        <td>{{ $row->class->class_name ?? '-' }}</td>
+        <td>{{ $row->subject->subject_name ?? '-' }}</td>
+        <td>{{ $row->room }}</td>
+    </tr>
+@empty
+    <tr>
+        <td colspan="6">لا يوجد بيانات</td>
+    </tr>
+@endforelse
+
 </tbody>
 
 

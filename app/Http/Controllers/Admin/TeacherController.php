@@ -50,7 +50,6 @@ class TeacherController extends Controller
     session()->flash('password', $tempPassword);
     return redirect()->back()->with('success', 'تم إضافة المعلم بنجاح');
 
- 
 }
 
 

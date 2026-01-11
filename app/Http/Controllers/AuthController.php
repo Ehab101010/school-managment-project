@@ -56,24 +56,28 @@ class AuthController extends Controller
         $request->validate([
             'username' => 'required|string',
             'old_password' => 'required|string',
-            'new_password' => 'required|string|min:6',
+            'new_password' => 'required|string|min:6|confirmed',
+        ], [
+            'new_password.confirmed' => 'كلمتا المرور الجديدتان غير متطابقتين',
         ]);
     
-         $user = User::where('username', $request->username)->first();
+        $user = User::where('username', $request->username)->first();
     
         if (!$user) {
             return back()->withErrors(['username' => 'اسم المستخدم غير موجود']);
         }
     
-         if (!Hash::check($request->old_password, $user->password)) {
+        if (!Hash::check($request->old_password, $user->password)) {
             return back()->withErrors(['old_password' => 'كلمة المرور القديمة غير صحيحة']);
         }
     
-         $user->password = $request->new_password;
+        $user->password = $request->new_password; 
         $user->save();
     
-        return redirect()->route('login')->with('success', 'تم تغيير كلمة المرور بنجاح، قم بتسجيل الدخول الآن.');
+        return redirect()->route('login')
+            ->with('success', 'تم تغيير كلمة المرور بنجاح، قم بتسجيل الدخول الآن.');
     }
+    
     
     
     public function logout(Request $request)

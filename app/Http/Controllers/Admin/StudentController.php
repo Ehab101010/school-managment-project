@@ -33,13 +33,13 @@ class StudentController extends Controller
     {
          $request->validate([
             'full_name'            => 'required|string|max:255',
-            'mother_name'          => 'nullable|string|max:255',
-            'birth_date'           => 'nullable|date',
-            'gender'               => 'nullable|in:ذكر,أنثى',
-            'nationality'          => 'nullable|string|max:255',
-            'student_phone_number' => 'nullable|string|max:20',
-            'father_phone_number'  => 'nullable|string|max:20',
-            'mother_phone_number'  => 'nullable|string|max:20',
+            'mother_name'          => 'required|string|max:255',
+            'birth_date'           => 'required|date',
+            'gender'               => 'required|in:ذكر,أنثى',
+            'nationality'          => 'required|string|max:255',
+            'student_phone_number' => 'required|string|max:20',
+            'father_phone_number'  => 'required|string|max:20',
+            'mother_phone_number'  => 'required|string|max:20',
             'class_id'             => 'required|exists:classes,class_id',
             'notes'                => 'nullable|string',
         ]);

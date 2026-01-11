@@ -20,4 +20,10 @@ class ClassModel extends Model
         'section_name',
         'section_type',
      ];
+ 
+public function timetables()
+{
+    return $this->hasMany(Timetable::class, 'class_id', 'class_id');
+}
+
 }

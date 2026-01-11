@@ -14,19 +14,9 @@ class DashboardController extends Controller
   public function adminHomepage()
   {
   
-         $studentsCount = Student::count();
-        $teachersCount = Teacher::count();
-        $classesCount = ClassModel::count();
-        $subjectsCount = Subject::count();
+      
 
- 
-
-         return view('admin.dashboard', compact(
-            'studentsCount',
-            'teachersCount',
-            'classesCount',
-            'subjectsCount',
-         ));
+         return view('admin.dashboard');
    
   }
   

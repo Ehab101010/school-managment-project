@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Teacher;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Student;
+use App\Models\ClassAssignment;
 use App\Models\ClassModel;
 use App\Models\Section;
 use App\Models\Subject;
@@ -23,10 +23,9 @@ class TeacherHomeController extends Controller
     {
         $teacherId = auth()->user()->profile_id;
     
-        $assignments = DB::table('class_assignments')
-            ->where('teacher_id', $teacherId)
-            ->select('class_id', 'subject_id')
-            ->get();
+        $assignments = ClassAssignment::where('teacher_id', $teacherId)
+        ->select('class_id', 'subject_id')
+        ->get();
     
         $classIds = $assignments->pluck('class_id')->unique();
     
@@ -47,19 +46,11 @@ class TeacherHomeController extends Controller
      public function showTeacherTimetable()
     {
         $teacherId = auth()->user()->profile_id; 
-
-        $timetable = DB::table('timetables')
-            ->join('classes', 'timetables.class_id', '=', 'classes.class_id')
-            ->join('subjects', 'timetables.subject_id', '=', 'subjects.subject_id')
-            ->where('timetables.teacher_id', $teacherId)
-            ->select(
-                'timetables.*',
-                'classes.class_name',
-                'subjects.subject_name'
-            )
-            ->orderBy('day')
-            ->orderBy('period')
-            ->get();
+        $timetable = Timetable::with(['class', 'subject'])
+        ->where('teacher_id', $teacherId)
+        ->orderBy('day')
+        ->orderBy('period')
+        ->get();
 
         return view('teacher.teacher-timetable', compact('timetable'));
     }
@@ -67,13 +58,12 @@ class TeacherHomeController extends Controller
      public function showAddGradesForm(Request $request)
     {
         $teacherId = auth()->user()->profile_id;  
-
-         $classes = DB::table('timetables')
-            ->join('classes', 'timetables.class_id', '=', 'classes.class_id')
-            ->where('timetables.teacher_id', $teacherId)
-            ->select('classes.class_id', 'classes.class_name', 'classes.section_name', 'classes.section_type')
-            ->distinct()
-            ->get();
+        $classes = Timetable::where('teacher_id', $teacherId)
+        ->with('class') 
+        ->get()
+        ->pluck('class')   
+        ->unique('class_id')  
+        ->values(); 
 
          $sections = [];
         if ($request->class_name) {
@@ -82,21 +72,20 @@ class TeacherHomeController extends Controller
 
          $subjects = [];
         if ($request->class_id) {
-            $subjects = DB::table('timetables')
-                ->join('subjects', 'timetables.subject_id', '=', 'subjects.subject_id')
-                ->where('teacher_id', $teacherId)
-                ->where('class_id', $request->class_id)
-                ->select('subjects.subject_id', 'subjects.subject_name')
-                ->distinct()
-                ->get();
+            $subjects = Timetable::with('subject')
+            ->where('teacher_id', $teacherId)
+            ->where('class_id', $request->class_id)
+            ->get()
+            ->pluck('subject')
+            ->unique('subject_id')
+            ->values();
         }
 
          $students = [];
         if ($request->class_id && $request->subject_id) {
-            $students = DB::table('students')
-                ->where('class_id', $request->class_id)
-                ->select('student_id', 'full_name')
-                ->get();
+            $students = Student::where('class_id', $request->class_id)
+            ->select('student_id', 'full_name')
+            ->get();
         }
 
         return view('teacher.add-grades',
@@ -106,8 +95,10 @@ class TeacherHomeController extends Controller
 
      public function storeStudentGrades(Request $request)
     {
+        $gradesData = [];
+
         foreach ($request->grades as $student_id => $g) {
-            DB::table('grades')->insert([
+            $gradesData[] = [
                 'student_id'   => $student_id,
                 'subject_id'   => $request->subject_id,
                 'class_id'     => $request->class_id,
@@ -115,10 +106,13 @@ class TeacherHomeController extends Controller
                 'second_exam'  => $g['second'],
                 'activity'     => $g['activity'],
                 'final_exam'   => $g['final'],
-                'created_at'   => now()
-            ]);
+                'created_at'   => now(),
+                'updated_at'   => now(),
+            ];
         }
-
+        
+        Grade::insert($gradesData);
+        
         return back()->with('success', 'تم حفظ الدرجات بنجاح');
     }
 
@@ -128,24 +122,19 @@ class TeacherHomeController extends Controller
     {
         $teacherId = auth()->user()->profile_id;  
 
-        $subjects = DB::table('class_assignments')
-            ->join('subjects', 'subjects.subject_id', '=', 'class_assignments.subject_id')
-            ->where('class_assignments.teacher_id', $teacherId)
-            ->select('subjects.subject_id', 'subjects.subject_name')
-            ->distinct()
-            ->get();
+        $subjects = ClassAssignment::with('subject')
+        ->where('teacher_id', $teacherId)
+        ->get()
+        ->pluck('subject')      
+        ->unique('subject_id')  
+        ->values(); 
 
-            $classes = DB::table('class_assignments')
-            ->join('classes', 'classes.class_id', '=', 'class_assignments.class_id')
-            ->where('class_assignments.teacher_id', $teacherId)
-            ->select(
-                'classes.class_id',
-                'classes.class_name',
-                'classes.section_name',
-                'classes.section_type'
-            )
-            ->distinct()
-            ->get();
+        $classes = ClassAssignment::with('class')
+        ->where('teacher_id', $teacherId)
+        ->get()
+        ->pluck('class')     
+        ->unique('class_id')  
+        ->values(); 
         
 
         return view('teacher.create-content', compact('subjects', 'classes'));
@@ -166,10 +155,12 @@ class TeacherHomeController extends Controller
  
         public function deleteEducationalContent($id)
         {
-            DB::table('learning_contents')->where('id', $id)->delete();
+            $content = LearningContent::findOrFail($id);
+            $content->delete();
         
             return redirect()->back()->with('success', 'تم حذف المحتوى بنجاح');
         }
+        
         
  public function storeEducationalContent(Request $request)
 {
@@ -179,26 +170,25 @@ class TeacherHomeController extends Controller
         'title'         => 'required|string|max:255',
         'content_type'  => 'required|in:video,pdf,excel,assignment,link',
         'description'   => 'required|string',
-        'pdf_file'      => 'nullable|mimes:pdf|max:20480',        
-        'excel_file'    => 'nullable|mimes:xls,xlsx|max:20480',   
+        'pdf_file'      => 'nullable|mimes:pdf|max:20480',
+        'excel_file'    => 'nullable|mimes:xls,xlsx|max:20480',
         'external_link' => 'nullable|string',
     ]);
 
-    $teacherId = auth()->user()->profile_id;
     $filePath = null;
 
-     if ($request->content_type === 'pdf' && $request->hasFile('pdf_file')) {
-        $file = $request->file('pdf_file');
-        $filePath = $file->storeAs('teacher_content', time().'_'.$file->getClientOriginalName(), 'public');
+    if ($request->content_type === 'pdf' && $request->hasFile('pdf_file')) {
+        $filePath = $request->file('pdf_file')
+            ->store('teacher_content', 'public');
     }
 
-     if ($request->content_type === 'excel' && $request->hasFile('excel_file')) {
-        $file = $request->file('excel_file');
-        $filePath = $file->storeAs('teacher_content', time().'_'.$file->getClientOriginalName(), 'public');
+    if ($request->content_type === 'excel' && $request->hasFile('excel_file')) {
+        $filePath = $request->file('excel_file')
+            ->store('teacher_content', 'public');
     }
 
-    DB::table('learning_contents')->insert([
-        'teacher_id'    => $teacherId,
+    LearningContent::create([
+        'teacher_id'    => auth()->user()->profile_id,
         'subject_id'    => $request->subject_id,
         'class_id'      => $request->class_id,
         'title'         => $request->title,
@@ -206,7 +196,6 @@ class TeacherHomeController extends Controller
         'description'   => $request->description,
         'file_path'     => $filePath,
         'external_link' => $request->external_link,
-        'created_at'    => now(),
     ]);
 
     return back()->with('success', 'تم إضافة المحتوى بنجاح');

@@ -18,11 +18,11 @@ class LearningContent extends Model
         'content_type',
         'description',
         'file_path',
-        'external_link',
         'teacher_id',
     ];
-
-   
+ 
+ 
+ 
     public function subject()
     {
         return $this->belongsTo(Subject::class, 'subject_id');
