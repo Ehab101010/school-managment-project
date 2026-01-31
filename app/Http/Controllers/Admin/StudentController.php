@@ -94,16 +94,22 @@ class StudentController extends Controller
     
     public function deleteStudent($id)
     {
-         $student = Student::findOrFail($id);
+        $student = Student::findOrFail($id);
     
-         \App\Models\User::where('role', 'student')
+        // حذف كل الدرجات المرتبطة بالطالب
+        \App\Models\Grade::where('student_id', $student->student_id)->delete();
+    
+        // حذف الحساب المرتبط
+        \App\Models\User::where('role', 'student')
             ->where('profile_id', $student->student_id)
             ->delete();
     
-         $student->delete();
+        // حذف الطالب نفسه
+        $student->delete();
     
-        return redirect()->back()->with('success', 'تم حذف الطالب والحساب المرتبط بنجاح');
+        return redirect()->back()->with('success', 'تم حذف الطالب بنجاح');
     }
+    
     
     public function getStudent($id)
 {

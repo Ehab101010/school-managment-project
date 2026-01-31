@@ -9,6 +9,7 @@ use App\Models\ClassAssignment;
 use App\Models\ClassModel;
 use App\Models\Section;
 use App\Models\Subject;
+use App\Models\Grade;
 use App\Models\Timetable;
 use App\Models\LearningContent;
 
@@ -106,8 +107,7 @@ class TeacherHomeController extends Controller
                 'second_exam'  => $g['second'],
                 'activity'     => $g['activity'],
                 'final_exam'   => $g['final'],
-                'created_at'   => now(),
-                'updated_at'   => now(),
+       
             ];
         }
         

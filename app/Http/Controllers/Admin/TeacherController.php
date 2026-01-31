@@ -64,16 +64,22 @@ class TeacherController extends Controller
 
     public function deleteTeacher($id)
     {
-         $teacher = Teacher::findOrFail($id);
+        $teacher = Teacher::findOrFail($id);
     
-         \App\Models\User::where('role', 'teacher')
+        // حذف جميع التعيينات المرتبطة بالمعلم
+        \App\Models\ClassAssignment::where('teacher_id', $teacher->teacher_id)->delete();
+    
+        // حذف الحساب المرتبط إذا موجود
+        \App\Models\User::where('role', 'teacher')
             ->where('profile_id', $teacher->teacher_id)
             ->delete();
     
-         $teacher->delete();
+        // حذف المعلم نفسه
+        $teacher->delete();
     
-        return redirect()->back()->with('success','تم حذف المعلم والحساب المرتبط بنجاح');
+        return redirect()->back()->with('success', 'تم حذف المعلم  بنجاح');
     }
+    
         public function getTeacher($id)
 {
     $teacher = Teacher::findOrFail($id);
