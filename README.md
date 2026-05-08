@@ -2,20 +2,35 @@
 
 A web-based School Management System developed using the Laravel framework.
 This project is designed as an academic application to manage school operations
-including classes, subjects, teachers, students, timetables, exams, and grades.
+including classes, subjects, teachers, students, timetables, exams, grades, and parent communication.
 
 ---
 
 ## Project Features
 
-- User authentication and role-based access (Admin, Teacher, Student)
+- User authentication and role-based access (Admin, Teacher, Student, Parent)
 - Class and subject management
 - Teacher and student management
-- Class-subject assignments
+- Class-subject assignments and teacher assignments
 - Timetables and exam schedules
 - Grade management
 - Learning content management
+- Attendance tracking (students & teachers)
+- Messaging and announcements system
+- Parent portal (view child's grades, attendance, schedule, and content)
+- Monthly reports
 - Clean MVC architecture using Laravel
+
+---
+
+## User Roles
+
+| Role    | Description                                                                |
+| ------- | -------------------------------------------------------------------------- |
+| Admin   | Full system control: manage users, classes, subjects, assignments, reports |
+| Teacher | Manage content, grades, attendance, and communicate with students/parents  |
+| Student | View schedule, grades, content, attendance, and receive messages           |
+| Parent  | View child's academic info, grades, attendance, and receive announcements  |
 
 ---
 
@@ -57,37 +72,37 @@ cp .env.example .env
 php artisan key:generate
 ```
 
-## 🗄 Database Initialization : SQL Import
+### 🗄️ Database Initialization: SQL Import
 
 Import the SQL file located at:
-database/sql/school_db
 
-## ▶️ Running the Application
+```
+database/sql/school_db
+```
+
+### ▶️ Running the Application
 
 ```bash
 php artisan serve
 ```
 
+---
+
 ## 🔐 Default Test Users
 
-Admin
+| Role    | Username   | Password   |
+| ------- | ---------- | ---------- |
+| Admin   | admin      | admin123   |
+| Teacher | ahmad.ali  | teacher123 |
+| Student | student_17 | student123 |
+| Parent  | parent_4   | parent123  |
 
-username: admin
+---
 
-Password: admin123
+## ⚠️ Project Report
 
-Teacher
+The project report is available at:
 
-username: ahmad.ali
-
-Password: 123
-
-Student
-
-username: student_19
-
-Password: 123456
-
-## ⚠️ The project report is available in :
-
+```
 Report/Project Report
+```
