@@ -20,7 +20,9 @@ class ClassAssignment extends Model
     public function class() {
         return $this->belongsTo(ClassModel::class, 'class_id', 'class_id');
     }
-
+ public function classRoom() {
+    return $this->belongsTo(ClassModel::class, 'class_id', 'class_id');
+}
     public function subject() {
         return $this->belongsTo(Subject::class, 'subject_id', 'subject_id');
     }

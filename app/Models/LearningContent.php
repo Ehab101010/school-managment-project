@@ -11,16 +11,16 @@ class LearningContent extends Model
 
     protected $table = 'learning_contents';
 
-     protected $fillable = [
-        'subject_id',
-        'class_id',
-        'title',
-        'content_type',
-        'description',
-        'file_path',
-        'teacher_id',
-    ];
- 
+protected $fillable = [
+    'teacher_id',
+    'subject_id',
+    'class_id',
+    'title',
+    'content_type',
+    'description',
+    'file_path',     
+    'external_link',
+];
  
  
     public function subject()

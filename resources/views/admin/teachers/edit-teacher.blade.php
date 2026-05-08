@@ -1,170 +1,172 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعديل بيانات المعلمين</title>
     <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
-    <title>عرض وتعديل بيانات المعلمين</title>
-     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+
 @include('includes.admin-sidebar')
 
- <div class="content content-edit-teacher">
-    <div class="page-header">
-        <h1> تعديل بيانات المعلمين</h1>
-        <p>قائمة بجميع المعلمين المسجلين مع خيارات التعديل والحذف وتعيين الصفوف.</p>
+<div class="mobile-topbar">
+    <div style="width:44px"></div>
+    <span class="mobile-topbar-title">تعديل معلم</span>
+    <span class="mobile-topbar-badge"><i class='bx bxs-crown'></i> مدير</span>
+</div>
+
+<div class="content">
+    <div class="page-hero hero-teal fade-in">
+        <div class="page-hero-inner">
+            <div>
+                <h1><i class='bx bx-edit'></i> تعديل بيانات المعلم</h1>
+                <p>تحديث المعلومات الشخصية للمعلم</p>
+            </div>
+<div class="hero-icon-wrap"><i class='bx bxs-user-badge'></i></div>
+        </div>
     </div>
+
     @if(session('success'))
-    <div class=" alert-success">
-        {{ session('success') }}
-    </div>
-@endif
+        <div class="alert-success fade-in"><i class='bx bx-check-circle'></i> {{ session('success') }}</div>
+    @endif
+    @if(session('error'))
+        <div class="alert-danger fade-in"><i class='bx bx-error-circle'></i> {{ session('error') }}</div>
+    @endif
 
-@if(session('error'))
-    <div class=" alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
-    <div class="card">
-         <div class="toolbar">
-        <form method="GET" action="{{ route('admin.edit-teacher') }}">
-    <div class="search-box">
-        <input type="text" name="search" placeholder="البحث باسم المعلم أو المادة" value="{{ request('search') }}">
-        <button type="submit">بحث</button>
-    </div>
-</form>
-
- 
+    <div class="card fade-in">
+        <div class="toolbar">
+            <form method="GET" action="{{ route('admin.edit-teacher') }}">
+                <div class="search-box">
+                    <input type="text" name="search" placeholder="البحث باسم المعلم" value="{{ request('search') }}">
+                    <button type="submit"><i class='bx bx-search'></i> بحث</button>
+                </div>
+            </form>
         </div>
 
-         <div class="table-responsive">
+        <div class="table-responsive">
             <table>
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>الاسم الكامل</th>
-                        <th> اسم الام</th>
-                        <th>تاريخ الميلاد</th>
-                        <th> الجنس</th>
-                        <th> الجنسية</th>
-                         <th>السكن </th>
-                        <th>رقم الهاتف </th>
-                        <th>البريد الإلكتروني</th>
-                        <th>الملاحظات </th>
-                        <th>إجراءات</th>
+                        <th>#</th><th>الاسم الكامل</th><th>اسم الأم</th>
+                        <th>تاريخ الميلاد</th><th>الجنس</th><th>الجنسية</th>
+                        <th>السكن</th><th>الهاتف</th><th>البريد</th>
+                        <th>ملاحظات</th><th>إجراءات</th>
                     </tr>
                 </thead>
                 <tbody>
-@foreach($teachers as $teacher)
-<tr>
-    <td>{{ $loop->iteration }}</td>
-    <td>{{ $teacher->full_name }}</td>
-    <td>{{ $teacher->mother_name }}</td>
-    <td>{{ $teacher->birth_date }}</td>
-    <td>{{ $teacher->gender }}</td>
-    <td>{{ $teacher->nationality }}</td>
-     <td>{{ $teacher->address }}</td>
-    <td>{{ $teacher->phone }}</td>
-    <td>{{ $teacher->email }}</td>
-    <td>{{ $teacher->notes }}</td>
-    <td>
-     <button class="btn-edit" onclick="openTeacherModal({{ $teacher->teacher_id }})">
-    تعديل
-</button>
-
-     <form action="{{ route('admin.delete-teacher', $teacher->teacher_id) }}" method="POST" style="display:inline-block;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn-delete" onclick="return confirm('هل أنت متأكد من حذف هذا المعلم؟')">
-            حذف
-        </button>
-    </form>
-</td>
-
-</tr>
-@endforeach
-</tbody>
-
+                    @foreach($teachers as $teacher)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td><div class="tea-name-cell"><div class="tea-avatar">{{ mb_substr($teacher->full_name,0,1) }}</div><div><span class="tea-name">{{ $teacher->full_name }}</span></div></div></td>
+                        <td>{{ $teacher->mother_name }}</td>
+                        <td>{{ $teacher->birth_date }}</td>
+                        <td>{{ $teacher->gender }}</td>
+                        <td>{{ $teacher->nationality }}</td>
+                        <td>{{ $teacher->address }}</td>
+                        <td>{{ $teacher->phone }}</td>
+                        <td>{{ $teacher->email }}</td>
+                        <td>{{ $teacher->notes ?? '-' }}</td>
+                        <td>
+                            <div class="table-actions">
+                                <button class="btn-edit" onclick="openTeacherModal({{ $teacher->teacher_id }})">
+                                    <i class='bx bx-edit'></i> تعديل
+                                </button>
+                                <form action="{{ route('admin.delete-teacher', $teacher->teacher_id) }}" method="POST" style="display:inline-block;">
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn-delete" onclick="return confirm('هل أنت متأكد؟')">
+                                        <i class='bx bx-trash'></i> حذف
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
             </table>
-            @if ($teachers->hasPages())
-<div class="pagination-container">
-    <ul class="pagination">
-        <li class="{{ $teachers->onFirstPage() ? 'disabled' : '' }}">
-            <a href="{{ $teachers->previousPageUrl() ?? '#' }}" class="page-link">السابق</a>
-        </li>
-
-        @foreach ($teachers->getUrlRange(1, $teachers->lastPage()) as $page => $url)
-            <li class="{{ $page == $teachers->currentPage() ? 'active' : '' }}">
-                <a href="{{ $url }}" class="page-link">{{ $page }}</a>
-            </li>
-        @endforeach
-
-        <li class="{{ $teachers->hasMorePages() ? '' : 'disabled' }}">
-            <a href="{{ $teachers->nextPageUrl() ?? '#' }}" class="page-link">التالي</a>
-        </li>
-    </ul>
-</div>
-@endif
-
         </div>
-        
- 
-    </div>
-</div>
-<div id="teacherModal" class="modal" style="display:none;">
-    <div class="modal-content">
-        <h2>تعديل بيانات المعلم</h2>
 
-        <form id="teacherForm" method="POST">
-            @csrf
-
-            <label>الاسم الكامل</label>
-            <input type="text" name="full_name" id="t_full_name">
-
-            <label>اسم الأم</label>
-            <input type="text" name="mother_name" id="t_mother_name">
-
-            <label>تاريخ الميلاد</label>
-            <input type="date" name="birth_date" id="t_birth_date">
-
-            <label>الجنس</label>
-            <select name="gender" id="t_gender">
-                <option value="male">ذكر</option>
-                <option value="female">أنثى</option>
-            </select>
-
-            <label>الجنسية</label>
-            <input type="text" name="nationality" id="t_nationality">
-
-            <label>المواد المتقنة</label>
-            <input type="text" name="subject" id="t_subject">
-
-            <label>السكن</label>
-            <input type="text" name="address" id="t_address">
-
-            <label>رقم الهاتف</label>
-            <input type="text" name="phone" id="t_phone">
-
-            <label>البريد الإلكتروني</label>
-            <input type="email" name="email" id="t_email">
-
-            <label>ملاحظات</label>
-            <textarea name="notes" id="t_notes"></textarea>
-
-            <div class="modal-buttons">
-                <button type="submit" class="btn-save">حفظ</button>
-                <button type="button" class="btn-cancel" onclick="closeTeacherModal()">إلغاء</button>
-            </div>
-        </form>
+        @if ($teachers->hasPages())
+        <div class="pagination-container">
+            <ul class="pagination">
+                <li class="{{ $teachers->onFirstPage() ? 'disabled' : '' }}">
+                    <a href="{{ $teachers->previousPageUrl() ?? '#' }}">السابق</a>
+                </li>
+                @foreach ($teachers->getUrlRange(1, $teachers->lastPage()) as $page => $url)
+                    <li class="{{ $page == $teachers->currentPage() ? 'active' : '' }}">
+                        <a href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                @endforeach
+                <li class="{{ $teachers->hasMorePages() ? '' : 'disabled' }}">
+                    <a href="{{ $teachers->nextPageUrl() ?? '#' }}">التالي</a>
+                </li>
+            </ul>
+        </div>
+        @endif
     </div>
 </div>
 
- 
+{{-- Modal التعديل --}}
+<div id="teacherModal" class="modal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div class="modal-title"><i class='bx bx-edit'></i> تعديل بيانات المعلم</div>
+            <button class="modal-close" onclick="closeTeacherModal()"><i class='bx bx-x'></i></button>
+        </div>
+        <div class="modal-body">
+            <form id="teacherForm" method="POST">
+                @csrf
+                <div class="modal-form-grid">
+                    <div class="sf">
+                        <label>الاسم الكامل</label>
+                        <div class="sf-input-wrap"><i class='bx bx-user'></i><input type="text" name="full_name" id="t_full_name"></div>
+                    </div>
+                    <div class="sf">
+                        <label>اسم الأم</label>
+                        <div class="sf-input-wrap"><i class='bx bx-user'></i><input type="text" name="mother_name" id="t_mother_name"></div>
+                    </div>
+                    <div class="sf">
+                        <label>تاريخ الميلاد</label>
+                        <div class="sf-input-wrap"><input type="date" name="birth_date" id="t_birth_date"></div>
+                    </div>
+                    <div class="sf">
+                        <label>الجنس</label>
+                        <div class="sf-input-wrap"><i class='bx bx-male-female'></i>
+                            <select name="gender" id="t_gender">
+                                <option value="ذكر">ذكر</option><option value="أنثى">أنثى</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="sf">
+                        <label>الجنسية</label>
+                        <div class="sf-input-wrap"><i class='bx bx-flag'></i><input type="text" name="nationality" id="t_nationality"></div>
+                    </div>
+                    <div class="sf">
+                        <label>السكن</label>
+                        <div class="sf-input-wrap"><i class='bx bx-map'></i><input type="text" name="address" id="t_address"></div>
+                    </div>
+                    <div class="sf">
+                        <label>الهاتف</label>
+                        <div class="sf-input-wrap"><i class='bx bx-phone'></i><input type="text" name="phone" id="t_phone"></div>
+                    </div>
+                    <div class="sf">
+                        <label>البريد الإلكتروني</label>
+                        <div class="sf-input-wrap"><i class='bx bx-envelope'></i><input type="email" name="email" id="t_email"></div>
+                    </div>
+                    <div class="sf" style="grid-column:1/-1;">
+                        <label>ملاحظات</label>
+                        <div class="sf-input-wrap"><textarea name="notes" id="t_notes" rows="3"></textarea></div>
+                    </div>
+                </div>
+                <div class="modal-footer" style="margin-top:1rem;padding:0;">
+                    <button type="button" class="btn-reset" onclick="closeTeacherModal()"><i class='bx bx-x'></i> إلغاء</button>
+                    <button type="submit" class="btn-add teal"><i class='bx bx-save'></i> حفظ التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
- <script src="{{ asset('js/admin.js') }}"></script>
-
-
+<script src="{{ asset('js/admin.js') }}"></script>
 </body>
 </html>

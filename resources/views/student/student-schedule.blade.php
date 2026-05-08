@@ -1,66 +1,79 @@
-
+{{-- resources/views/student/student-schedule.blade.php --}}
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة تحكم الطالب</title>
+    <title>الجدول الدراسي — بوابة الطالب</title>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/student.css') }}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
-
 
 @include('includes.student-sidebar')
 
-     <div class="content">
- 
-     <div class="schedule-container">
-    <h1>الجدول الدراسي</h1>
+<div class="content">
 
-    <table class="schedule-table">
-    <thead>
-        <tr>
-            @foreach($days as $day)
-                <th>{{ $day }}</th>
-            @endforeach
-        </tr>
-    </thead>
+    <div class="page-topbar fade-in">
+        <div class="page-title-group">
+            <h1><i class='bx bx-calendar-week'></i> الجدول الدراسي</h1>
+            <div class="breadcrumb">
+                <span>الرئيسية</span>
+                <i class='bx bx-chevron-left'></i>
+                <span>الجدول الدراسي</span>
+            </div>
+        </div>
+    </div>
 
-    <tbody>
-        @foreach($periods as $period)
-        <tr>
-            @foreach($days as $day)
-                <td>
-                    @if(isset($mapped[$day][$period]))
-                        <strong>{{ $mapped[$day][$period]->subject->subject_name }}</strong><br>
-                        <span>{{ $mapped[$day][$period]->time_from }} - {{ $mapped[$day][$period]->time_to }}</span><br>
-                        <span>{{ $mapped[$day][$period]->teacher->full_name }}</span><br>
-                        <span>قاعة: {{ $mapped[$day][$period]->room }}</span>
-                    @else
-                        -
-                    @endif
-                </td>
-            @endforeach
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+    <div class="card fade-in">
+        <div class="card-header">
+            <span class="card-title"><i class='bx bx-time'></i> الجدول الأسبوعي</span>
+        </div>
 
+        <div class="table-wrapper">
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        @foreach($days as $day)
+                            <th>{{ $day }}</th>
+                        @endforeach
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($periods as $period)
+                    <tr>
+                        @foreach($days as $day)
+                        <td>
+                            @if(isset($mapped[$day][$period]))
+                            @php $slot = $mapped[$day][$period]; @endphp
+                            <div class="schedule-cell">
+                                <span class="subj-name">{{ $slot->subject->subject_name }}</span>
+                                <span class="subj-time">
+                                    <i class='bx bx-time-five'></i>
+                                    {{ $slot->time_from }} - {{ $slot->time_to }}
+                                </span>
+                                <span class="subj-teacher">
+                                    <i class='bx bx-user'></i>
+                                    {{ $slot->teacher->full_name }}
+                                </span>
+                                <span class="subj-room">
+                                    <i class='bx bx-door-open'></i> {{ $slot->room }}
+                                </span>
+                            </div>
+                            @else
+                            <span class="empty-cell">—</span>
+                            @endif
+                        </td>
+                        @endforeach
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </div>
 
-
-
-    </div>
-
-    <script src="{{ asset('js/student.js') }}"></script>
-
- 
-
+<script src="{{ asset('js/student.js') }}"></script>
 </body>
 </html>
-
-
-

@@ -35,5 +35,7 @@ class Timetable extends Model
     {
         return $this->belongsTo(ClassModel::class, 'class_id', 'class_id');
     }
- 
+   public function student() {
+        return $this->belongsTo(Student::class,'student_id');
+    }
 }

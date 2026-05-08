@@ -31,4 +31,7 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+    public function teacher() {
+    return $this->belongsTo(Teacher::class, 'profile_id', 'teacher_id');
+}
 }

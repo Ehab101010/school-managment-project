@@ -23,7 +23,13 @@ class Student extends Model
         'class_id',
         'section_type',
         'notes',
+        'parent_id',
     ];
+
+      public function parent()
+    {
+        return $this->belongsTo(StudentParent::class, 'parent_id');
+    }
  
      public function class()
     {
@@ -34,7 +40,12 @@ class Student extends Model
     {
         return $this->belongsTo(Section::class, 'section_id', 'section_id');
     }
-
+ 
+public function user()
+{
+    return $this->hasOne(User::class, 'profile_id', 'student_id')
+                ->where('role', 'student');
+}
      public function teacher()
     {
         return $this->hasOneThrough(

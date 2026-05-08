@@ -1,0 +1,486 @@
+ 
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .48);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.modal-overlay.open {
+    display: flex;
+    animation: sharedFadeIn .2s ease;
+}
+
+/* Modal box */
+.modal.shared-modal {
+    background: var(--surface, var(--card-bg, #fff));
+    border-radius: var(--radius, 14px);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg, 0 20px 50px rgba(0,0,0,.18));
+    animation: sharedSlideUp .25s ease;
+}
+
+/* Modal header */
+.shared-modal .modal-head {
+    padding: 1.25rem 1.6rem;
+    border-bottom: 1px solid var(--border, #e0e7ef);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.shared-modal .modal-head-title {
+    font-size: .98rem;
+    font-weight: 800;
+    color: var(--text, #1e2d3d);
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+}
+.modal-head-title i {
+    font-size: 1.2rem;
+    opacity: .85;
+}
+.modal-close {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bg, #f0f4f8);
+    border: 1px solid var(--border, #e0e7ef);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted, #627b92);
+    font-size: 1.2rem;
+    transition: background .18s;
+}
+.shared-modal .modal-close:hover { background: var(--border, #dde3ed); }
+
+/* Modal body */
+.shared-modal .modal-body { padding: 1.6rem; }
+
+.shared-modal .modal-ann-title,
+.shared-modal .modal-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text, #1e2d3d);
+    margin-bottom: .9rem;
+    line-height: 1.55;
+}
+.modal-meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-bottom: 1.2rem;
+}
+.modal-content-box {
+    background: var(--bg, #f0f4f8);
+    border: 1px solid var(--border, #e0e7ef);
+    border-radius: var(--radius-sm, 10px);
+    padding: 1.2rem 1.3rem;
+    font-size: .92rem;
+    line-height: 1.85;
+    color: var(--text, #1e2d3d);
+    white-space: pre-line;
+}
+
+/* Modal footer */
+.shared-modal .modal-footer {
+    padding: 1rem 1.6rem;
+    border-top: 1px solid var(--border, #e0e7ef);
+    display: flex;
+    justify-content: flex-end;
+}
+.shared-modal .btn-close-m,
+.shared-modal .btn-close-modal {
+    padding: .48rem 1.4rem;
+    background: var(--bg, #f0f4f8);
+    border: 1.5px solid var(--border, #e0e7ef);
+    border-radius: var(--radius-sm, 10px);
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--text-muted, #627b92);
+    cursor: pointer;
+    transition: background .18s, color .18s, border-color .18s;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+}
+.shared-modal .btn-close-m:hover,
+.shared-modal .btn-close-modal:hover {
+    background: var(--primary, #1a3a5c);
+    color: #fff;
+    border-color: var(--primary, #1a3a5c);
+}
+
+/* ----------------------------------------------------------
+   2. ANN-MODAL — variant for admin and student affairs views,
+      avoids conflicts with the legacy .modal class
+   ---------------------------------------------------------- */
+.ann-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .48);
+    backdrop-filter: blur(4px);
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+.ann-modal-overlay.open {
+    display: flex;
+    animation: sharedFadeIn .2s ease;
+}
+.ann-modal-box {
+    background: var(--surface, #fff);
+    border-radius: var(--radius, 16px);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg, 0 20px 50px rgba(0,0,0,.18));
+    animation: sharedSlideUp .25s ease;
+}
+.ann-modal-head {
+    padding: 1.25rem 1.6rem;
+    border-bottom: 1px solid var(--border, #e2e8f0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.ann-modal-head-title {
+    font-size: .98rem;
+    font-weight: 800;
+    color: var(--text, #1e293b);
+    display: flex;
+    align-items: center;
+    gap: .45rem;
+}
+.ann-modal-head-title i { color: var(--primary, #1a3a5c); font-size: 1.2rem; }
+.ann-modal-close {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bg, #f8fafc);
+    border: 1px solid var(--border, #e2e8f0);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted, #64748b);
+    font-size: 1.2rem;
+    transition: background .18s;
+}
+.ann-modal-close:hover { background: var(--border, #e2e8f0); }
+.ann-modal-body { padding: 1.6rem; }
+.ann-modal-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--text, #1e293b);
+    margin-bottom: .95rem;
+    line-height: 1.55;
+}
+.ann-modal-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .45rem;
+    margin-bottom: 1.2rem;
+}
+.ann-modal-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: .28rem .85rem;
+    border-radius: 50px;
+    font-size: .78rem;
+    font-weight: 700;
+    border: 1px solid transparent;
+}
+.ann-modal-text {
+    background: var(--bg, #f8fafc);
+    border: 1px solid var(--border, #e2e8f0);
+    border-radius: var(--radius-sm, 10px);
+    padding: 1.2rem 1.3rem;
+    font-size: .92rem;
+    line-height: 1.85;
+    color: var(--text, #1e293b);
+    white-space: pre-line;
+}
+.ann-modal-footer {
+    padding: 1rem 1.6rem;
+    border-top: 1px solid var(--border, #e2e8f0);
+    display: flex;
+    justify-content: flex-end;
+}
+.ann-modal-btn-close {
+    padding: .48rem 1.4rem;
+    background: var(--bg, #f8fafc);
+    border: 1.5px solid var(--border, #e2e8f0);
+    border-radius: var(--radius-sm, 10px);
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+    color: var(--text-muted, #64748b);
+    cursor: pointer;
+    transition: all .18s;
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+}
+.ann-modal-btn-close:hover {
+    background: var(--primary, #1a3a5c);
+    color: #fff;
+    border-color: var(--primary, #1a3a5c);
+}
+/* ============================================================
+ SHARED MODAL 
+   ============================================================ */
+
+.modal-overlay, .ann-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);  
+    backdrop-filter: blur(8px);     
+    z-index: 1100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.modal-overlay.open, .ann-modal-overlay.open {
+    display: flex;
+    animation: sharedFadeIn .3s ease;
+}
+
+ 
+.modal.shared-modal, .ann-modal-box {
+    background: var(--bg-surface) !important;  
+    border: 1px solid var(--glass-border-strong) !important;
+    border-radius: 14px !important;  
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+    animation: sharedSlideUp .3s ease;
+}
+
+ 
+.shared-modal .modal-head, .ann-modal-head {
+    padding: 1.25rem 1.6rem;
+    border-bottom: 1px solid var(--glass-border) !important;
+    background: var(--glass-active);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+ 
+    border-top-left-radius: 14px;
+    border-top-right-radius: 14px;
+}
+
+.shared-modal .modal-head-title, .ann-modal-head-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: 'Tajawal', sans-serif;
+    color: var(--accent-yellow) !important;
+}
+
+ 
+.modal-close, .ann-modal-close {
+    width: 34px;
+    height: 34px;
+    border-radius: 50% !important; 
+    background: var(--glass) !important;
+    border: 1px solid var(--glass-border) !important;
+    color: var(--text-secondary) !important;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover, .ann-modal-close:hover {
+    background: #e74c3c !important;
+    color: #fff !important;
+    border-color: #ff7675 !important;
+}
+
+ 
+.shared-modal .modal-body, .ann-modal-body {
+    padding: 1.6rem;
+}
+
+ 
+.modal-content-box, .ann-modal-text {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--glass-border) !important;
+    border-radius: 14px !important;  
+    padding: 1.2rem;
+    color: var(--text-primary) !important;
+    line-height: 1.8;
+}
+
+ 
+.shared-modal .modal-footer, .ann-modal-footer {
+    padding: 1rem 1.6rem;
+    border-top: 1px solid var(--glass-border) !important;
+    background: var(--glass);
+    display: flex;
+    justify-content: flex-end;
+   
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
+}
+
+ 
+.shared-modal .btn-close-modal, .ann-modal-btn-close {
+    background: var(--glass-hover) !important;
+    border: 1px solid var(--glass-border-strong) !important;
+    color: #fff !important;
+    border-radius: 14px !important;  
+    padding: 0.5rem 1.5rem;
+    font-family: 'Tajawal', sans-serif;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.shared-modal .btn-close-modal:hover, .ann-modal-btn-close:hover {
+    background: var(--accent-teal) !important;
+    color: var(--bg-deep) !important;
+    border-color: var(--accent-teal) !important;
+}
+
+ .modal-meta-row span, .ann-modal-meta span {
+    background: var(--glass) !important;
+    color: var(--accent-teal) !important;
+    border: 1px solid var(--glass-border) !important;
+    padding: 6px 14px;
+    border-radius: 14px !important;  
+    font-size: 0.85rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
+ 
+@keyframes sharedFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sharedSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* ============================================================
+   تعديل المودال الموحد ليتناسب مع لوحة ولي الأمر (تنسيق أبيض)
+   ============================================================ */
+
+/* 1. الطبقة الخلفية (الغطاء) */
+.modal-overlay, .ann-modal-overlay {
+    background: rgba(15, 23, 42, 0.45) !important; /* لون داكن خفيف */
+    backdrop-filter: blur(2px) !important; /* بلورة بسيطة جداً */
+}
+
+/* 2. الصندوق الرئيسي */
+.modal.shared-modal, .ann-modal-box {
+    background: #ffffff !important; /* أبيض صريح */
+    border: 1px solid #e2e8f0 !important; /* إطار ناعم */
+    border-radius: 20px !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+    color: #1e293b !important;
+}
+
+/* 3. رأس المودال */
+.shared-modal .modal-head, .ann-modal-head {
+    background: #ffffff !important; /* أبيض */
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 1.25rem 1.6rem !important;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.shared-modal .modal-head-title, .ann-modal-head-title {
+    color: var(--primary, #1a73e8) !important; /* اللون الأزرق الخاص باللوحة */
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+}
+
+/* 4. زر الإغلاق (X) العلوي */
+.modal-close, .ann-modal-close {
+    background: #f1f5f9 !important; /* رمادي فاتح جداً */
+    border: 1px solid #e2e8f0 !important;
+    color: #64748b !important;
+}
+
+.modal-close:hover, .ann-modal-close:hover {
+    background: #fee2e2 !important; /* أحمر فاتح عند الهوفر */
+    color: #ef4444 !important;
+}
+
+/* 5. صندوق المحتوى النصي */
+.modal-content-box, .ann-modal-text {
+    background: #f8fafc !important; /* رمادي خفيف جداً لتمييز النص */
+    border: 1px solid #f1f5f9 !important;
+    color: #334155 !important;
+    border-radius: 14px !important;
+    line-height: 1.8 !important;
+    padding: 1.5rem !important;
+}
+
+/* 6. التاجات (Meta Spans) */
+.modal-meta-row span, .ann-modal-meta span {
+    background: #f1f5f9 !important; /* خلفية صلبة بدلاً من الشفافة */
+    color: #475569 !important; /* لون نص واضح */
+    border: 1px solid #e2e8f0 !important;
+    font-weight: 700 !important;
+    padding: 5px 12px !important;
+    border-radius: 10px !important;
+}
+
+/* 7. تذييل المودال (الفوتر) */
+.shared-modal .modal-footer, .ann-modal-footer {
+    background: #ffffff !important;
+    border-top: 1px solid #f1f5f9 !important;
+    padding: 1rem 1.6rem !important;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+/* 8. أزرار الإغلاق السفلية */
+.shared-modal .btn-close-modal, .ann-modal-btn-close, .btn-close-m {
+    background: var(--primary, #1a73e8) !important; /* أزرق */
+    color: #ffffff !important; /* نص أبيض */
+    border: none !important;
+    font-weight: 700 !important;
+    border-radius: 12px !important;
+    padding: 0.6rem 2rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.shared-modal .btn-close-modal:hover, .ann-modal-btn-close:hover {
+    background: var(--primary-dark, #1557b0) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+}
+
+/* تعديل العناوين الداخلية */
+.modal-title, .ann-modal-title {
+    color: #1e293b !important;
+    font-weight: 800 !important;
+}
+/* ----------------------------------------------------------
+   3. ANIMATIONS — shared between .modal and .ann-modal
+   ---------------------------------------------------------- */
+@keyframes sharedFadeIn  { from { opacity: 0; }                            to { opacity: 1; } }
+@keyframes sharedSlideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+

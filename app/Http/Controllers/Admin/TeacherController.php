@@ -66,16 +66,13 @@ class TeacherController extends Controller
     {
         $teacher = Teacher::findOrFail($id);
     
-        // حذف جميع التعيينات المرتبطة بالمعلم
-        \App\Models\ClassAssignment::where('teacher_id', $teacher->teacher_id)->delete();
+         \App\Models\ClassAssignment::where('teacher_id', $teacher->teacher_id)->delete();
     
-        // حذف الحساب المرتبط إذا موجود
-        \App\Models\User::where('role', 'teacher')
+         \App\Models\User::where('role', 'teacher')
             ->where('profile_id', $teacher->teacher_id)
             ->delete();
     
-        // حذف المعلم نفسه
-        $teacher->delete();
+         $teacher->delete();
     
         return redirect()->back()->with('success', 'تم حذف المعلم  بنجاح');
     }
